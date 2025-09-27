@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Login from './components/Login';
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {user ? (
+        <header className="App-header">
+          <h1>Welcome, {user.email} 🎉</h1>
+          <p>You are now logged in to the demo app.</p>
+          <button className="logout-btn" onClick={() => setUser(null)}>
+            Logout
+          </button>
+        </header>
+      ) : (
+        <Login onLogin={setUser} />
+      )}
     </div>
   );
 }
