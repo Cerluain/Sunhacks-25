@@ -2,7 +2,6 @@ import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, sessionmaker, declarative_base
 import hmac
 
-print("DB Script Running")
 db = sa.create_engine("sqlite:///./data.db", echo=False)
 Session = sessionmaker(bind=db)
 Base = declarative_base()
@@ -12,13 +11,8 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(sa.String(255), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(sa.String(255), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(sa.String(255), nullable=False)
-
-    def __repr__(self) -> str:  # helpful for debugging
-        return f"<User(id={self.id}, username={self.username}, email={self.email})>"
-
 
 def main() -> None:
     # create the SQLite file and tables only if the users table doesn't exist yet
@@ -29,33 +23,13 @@ def main() -> None:
     else:
         print("Tables already exist, skipping create_all")
 
-    # Insert example users if they don't already exist
-    user1 = User(username="Ricky", email="Ricky@gmail.com", password_hash="aonhtuea12903487aonth")
-    user2 = User(username="Robert", email="ROBERT23@gmail.com", password_hash="4321aonhtuea12903487aonth")
 
-    with Session() as session:
-        # avoid duplicate inserts for repeated runs: check if users exist
-        existing = session.query(User).filter(User.username.in_([user1.username, user2.username])).all()
-        if not existing:
-            session.add_all([user1, user2])
-            session.commit()
-            print("Added example users")
-        else:
-            print("Example users already exist (skipping insert):", existing)
-
-        # list users
-        users = session.query(User).all()
-        print("Users in DB:", users)
-        print("Session ending")
-
-
-
-def authenticate(username: str, password_hash: str) -> bool:
-    if not username or not password_hash:
+def authenticate(email: str, password_hash: str) -> bool:
+    if not email or not password_hash:
         return False
 
     with Session() as session:
-        user = session.query(User).filter_by(username=username).one_or_none()
+        user = session.query(User).filter_by(email=email).one_or_none()
         if user is None:
             return False
         try:
@@ -64,8 +38,58 @@ def authenticate(username: str, password_hash: str) -> bool:
             return False
 
 
+def create_user(email: str, password_hash: str) -> User | None:
+    if not email or not password_hash:
+        return None
+
+    with Session() as session:
+        # Check for existing email
+        exists = session.query(User).filter_by(email=email).first()
+        if exists:
+            return None
+
+        new_user = User(email=email, password_hash=password_hash)
+        session.add(new_user)
+        session.commit()
+        # refresh to get generated id
+        session.refresh(new_user)
+        return new_user
+
+
+def get_user_by_email(email: str) -> User | None:
+    if not email:
+        return None
+    with Session() as session:
+        return session.query(User).filter_by(email=email).one_or_none()
+
+
+def update_user_password(email: str, new_password_hash: str) -> bool:
+    if not email or not new_password_hash:
+        return False
+    with Session() as session:
+        user = session.query(User).filter_by(email=email).one_or_none()
+        if user is None:
+            return False
+        user.password_hash = new_password_hash
+        session.add(user)
+        session.commit()
+        return True
+
+
+def delete_user(email: str) -> bool:
+    if not email:
+        return False
+    with Session() as session:
+        user = session.query(User).filter_by(email=email).one_or_none()
+        if user is None:
+            return False
+        session.delete(user)
+        session.commit()
+        return True
+
+
 if __name__ == "__main__":
     main()
-    # Example auth checks
-    print("Auth check (correct) for Ricky:", authenticate("Ricky", "aonhtuea12903487aonth"))
-    print("Auth check (incorrect) for Ricky:", authenticate("Ricky", "wrong_password"))
+    # Example auth checks (use emails as unique identifiers)
+    print("Auth check (correct) for ricky@gmail.com:", authenticate("Ricky@gmail.com", "aonhtuea12903487aonth"))
+    print("Auth check (incorrect) for ricky@gmail.com:", authenticate("Ricky@gmail.com", "wrong_password"))
