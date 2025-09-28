@@ -59,13 +59,17 @@ const PasswordLogin = ({ email, onLogin, onBack }) => {
 
   const lockInCharacter = () => {
     setIsSummoned(false);
+    availableChars.length = 0;
+    const currentPassword = password.slice(0, -1);
+    const newChar = getNextCharacter();
+    setPassword(currentPassword + newChar);
   };
 
   const handleSubmit = () => {
     setError('');
     
     // Simple demo validation - in real app, this would check against a database
-    const demoPassword = 'Demo123!'; // Demo password for testing
+    const demoPassword = 'A'; // Demo password for testing
     
     if (password === demoPassword) {
       onLogin({ email });
