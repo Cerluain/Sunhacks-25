@@ -1,30 +1,28 @@
+// components/Header.js
 import React from 'react';
 import './Header.css';
 
 const Header = ({ user, onLoginClick, onLogout, onHomeClick }) => {
   return (
-    <header className="header">
-      <div className="header-left">
-        <h1 className="company-name">SunHacks</h1>
-      </div>
-      
-      <div className="header-right">
-        <button className="header-btn home-btn" onClick={onHomeClick}>
-          Home
-        </button>
-        
-        {user ? (
-          <div className="user-section">
-            <span className="user-email">Welcome, {user.email}</span>
-            <button className="header-btn logout-btn" onClick={onLogout}>
-              Logout
+    <header className="app-header">
+      <div className="header-content">
+        <div className="company-name">SunHacks</div>
+        <nav className="header-nav">
+          <div className="button-group">
+            <button className="nav-button home-btn" onClick={onHomeClick}>
+              Home
             </button>
+            {user ? (
+              <button className="nav-button auth-btn logout-btn" onClick={onLogout}>
+                Logout
+              </button>
+            ) : (
+              <button className="nav-button auth-btn login-btn" onClick={onLoginClick}>
+                Login / Sign Up
+              </button>
+            )}
           </div>
-        ) : (
-          <button className="header-btn login-btn" onClick={onLoginClick}>
-            Login / Sign Up
-          </button>
-        )}
+        </nav>
       </div>
     </header>
   );

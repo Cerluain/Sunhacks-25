@@ -1,7 +1,9 @@
+// Updated App.js
 import React, { useState } from 'react';
 import './App.css';
 import Login from './components/Login';
 import Header from './components/Header';
+import Homepage from './components/Homepage'; // Add this import
 
 function App() {
   const [user, setUser] = useState(null);
@@ -45,10 +47,7 @@ function App() {
           </button>
         </header>
       ) : (
-        <header className="App-header">
-          <h1>Welcome to SunHacks</h1>
-          <p>Click "Login / Sign Up" to get started!</p>
-        </header>
+        <Homepage /> // Replace the existing content with the Homepage component
       )}
     </div>
   );
