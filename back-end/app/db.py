@@ -24,18 +24,19 @@ def main() -> None:
         print("Tables already exist, skipping create_all")
 
 
-def authenticate(email: str, password_hash: str) -> bool:
+def authenticate(email: str, password_hash: str) -> None|any:
     if not email or not password_hash:
-        return False
+        return None
 
     with Session() as session:
         user = session.query(User).filter_by(email=email).one_or_none()
         if user is None:
-            return False
+            return None
         try:
-            return hmac.compare_digest(user.password_hash, password_hash)
+            return ((id, email, password_hash) 
+                    if hmac.compare_digest(user.password_hash, password_hash) else None)
         except Exception:
-            return False
+            return None
 
 
 def create_user(email: str, password_hash: str) -> User | None:
