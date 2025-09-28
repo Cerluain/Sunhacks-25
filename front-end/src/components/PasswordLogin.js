@@ -61,6 +61,10 @@ const PasswordLogin = ({ email, onLogin, onBack }) => {
 
   const lockInCharacter = () => {
     setIsSummoned(false);
+    availableChars.length = 0;
+    const currentPassword = password.slice(0, -1);
+    const newChar = getNextCharacter();
+    setPassword(currentPassword + newChar);
   };
 
   const handleSubmit = async () => {
