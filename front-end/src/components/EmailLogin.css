@@ -1,22 +1,24 @@
 .email-login-container {
-  min-height: 100vh;
+  height: calc(100vh - 70px); /* Full height minus header */
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
-  padding: 2rem 0;
+  padding: 1rem; /* Reduced padding */
+  overflow: hidden; /* Prevent scrolling */
 }
 
 .email-login-form {
   background: linear-gradient(135deg, #6C0200 0%, #900500 100%);
-  padding: 2.5rem;
+  padding: 2rem; /* Reduced from 2.5rem */
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 400px;
+  max-height: 90vh; /* Limit maximum height */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem; /* Reduced gap */
   border: 2px solid #BD953E;
 }
 

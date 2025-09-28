@@ -1,11 +1,12 @@
 /* components/Homepage.css */
 .homepage {
-  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px); /* Full height minus header */
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
   padding: 2rem;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 .main-content {
@@ -25,6 +26,8 @@
   justify-content: center;
   gap: 1.5rem; /* Added gap for spacing between text and image */
 }
+
+.mascot-placeholder {
 
 /* Text above mascot */
 .mascot-text-above {
@@ -66,9 +69,17 @@
   text-align: center;
 }
 
+.mascot-placeholder p:first-child {
+
 .mascot-text-below p {
   color: #BD953E;
   font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.mascot-placeholder p:last-child {
+  font-size: 0.9rem;
   margin: 0;
   line-height: 1.5;
   font-style: italic;
@@ -126,14 +137,22 @@
 
 /* Responsive design */
 @media (max-width: 968px) {
+  .homepage {
+    height: calc(100vh - 70px);
+    padding: 1.5rem;
+  }
+  
   .main-content {
     gap: 2rem;
   }
+  
+  .mascot-placeholder {
   
   .mascot-image {
     width: 280px;
     height: 280px;
   }
+}
   
   .mascot-text-above h3 {
     font-size: 1.6rem;
@@ -147,15 +166,23 @@
 
 @media (max-width: 768px) {
   .homepage {
-    padding: 1.5rem;
-    min-height: calc(100vh - 60px);
+    height: calc(100vh - 60px);
+    padding: 1rem;
   }
+  
   
   .main-content {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
   }
+  
+  .mascot-placeholder {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  
   
   .mascot-container {
     gap: 1rem;
@@ -180,6 +207,7 @@
     font-size: 2rem;
   }
   
+  
   .purpose-textbox {
     padding: 1.5rem;
   }
@@ -187,8 +215,15 @@
 
 @media (max-width: 480px) {
   .homepage {
-    padding: 1rem;
+    height: calc(100vh - 70px);
+    padding: 0.5rem;
   }
+  
+  .mascot-placeholder {
+    width: 220px;
+    height: 220px;
+  }
+  
   
   .mascot-image {
     width: 220px;
@@ -208,9 +243,11 @@
     font-size: 1.8rem;
   }
   
+  
   .purpose-textbox {
     padding: 1rem;
   }
+  
   
   .purpose-textbox h3 {
     font-size: 1.5rem;
