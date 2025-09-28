@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Login from './components/Login';
 import Header from './components/Header';
-import Homepage from './components/Homepage'; // Add this import
+import Homepage from './components/Homepage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,14 +40,19 @@ function App() {
         <Login onLogin={handleLogin} />
       ) : user ? (
         <header className="App-header">
-          <h1>Welcome, {user.email} 🎉</h1>
+          <h1>Welcome{user.isAdmin ? ' Admin' : ''}, {user.email} 🎉</h1>
           <p>You are now logged in to the demo app.</p>
+          {user.isAdmin && (
+            <div className="admin-badge">
+              🔑 Administrator Access
+            </div>
+          )}
           <button className="logout-btn" onClick={handleLogout}>
             Logout
           </button>
         </header>
       ) : (
-        <Homepage /> // Replace the existing content with the Homepage component
+        <Homepage />
       )}
     </div>
   );
