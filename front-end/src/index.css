@@ -5,9 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Ensure no scroll on the main page */
+html, body, #root {
+  height: 100%;
+  overflow: hidden; /* Prevent entire page from scrolling */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
 }
