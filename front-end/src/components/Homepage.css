@@ -1,14 +1,13 @@
-
 /* components/Homepage.css */
 .homepage {
-  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px); /* Full height minus header */
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
   padding: 2rem;
+  overflow: hidden; /* Prevent scrolling */
 }
-
 
 .main-content {
   max-width: 1200px;
@@ -16,9 +15,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  align-items: center;
+  align-items: start; /* Changed to start for better text alignment */
 }
-
 
 /* Mascot section */
 .mascot-container {
@@ -26,162 +24,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem; /* Added gap for spacing between text and image */
 }
 
 
-.mascot-placeholder {
-  width: 320px;
-  height: 320px;
-  background: linear-gradient(135deg, #900500 0%, #6C0200 100%);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 3px solid #BD953E;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  color: #D4B356;
+/* Text above mascot */
+.mascot-text-above {
   text-align: center;
-  padding: 1rem;
 }
 
-
-.mascot-placeholder p:first-child {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-
-.mascot-placeholder p:last-child {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: #BD953E;
-}
-
-
-/* About section */
-.about-section {
+.mascot-text-above h3 {
   color: #D4B356;
-  padding: 1rem;
-}
-
-
-.about-section h2 {
-  color: #D4B356;
-  margin-bottom: 1.5rem;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
+  margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid #BD953E;
   padding-bottom: 0.5rem;
 }
 
-
-.about-section p {
-  margin-bottom: 1.5rem;
-  color: #BD953E;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-
-.purpose-textbox {
-  background: linear-gradient(135deg, rgba(53, 2, 0, 0.9) 0%, rgba(108, 2, 0, 0.9) 100%);
-  border: 3px solid #BD953E;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  margin-top: 1rem;
-}
-
-
-.purpose-textbox h3 {
-  color: #D4B356;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  border-bottom: 2px solid #BD953E;
-  padding-bottom: 0.5rem;
-}
-
-
-.purpose-textbox p {
-  line-height: 1.7;
-  margin-bottom: 1.2rem;
-  color: #BD953E;
-}
-
-
-.purpose-textbox p:last-child {
-  margin-bottom: 0;
-}
-
-
-/* Responsive design */
-@media (max-width: 968px) {
-  .main-content {
-    gap: 2rem;
-  }
- 
-  .mascot-placeholder {
-    width: 280px;
-    height: 280px;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .homepage {
-    padding: 1.5rem;
-    min-height: calc(100vh - 60px);
-  }
- 
-  .main-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
- 
-  
- 
-  .about-section h2 {
-    font-size: 2rem;
-  }
- 
-  .purpose-textbox {
-    padding: 1.5rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .homepage {
-    padding: 1rem;
-  }
- 
-
- 
-  .about-section h2 {
-    font-size: 1.8rem;
-  }
- 
-  .purpose-textbox {
-    padding: 1rem;
-  }
- 
-  .purpose-textbox h3 {
-    font-size: 1.5rem;
-  }
-}
-
-
-/* Update the mascot section in Homepage.css */
-.mascot-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Mascot image */
 .mascot-image {
   width: 320px;
   height: 320px;
@@ -198,7 +59,194 @@
 .mascot-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Changed from cover to contain to show full GIF */
   border-radius: 12px;
 }
 
+/* Text below mascot */
+.mascot-text-below {
+  text-align: center;
+}
+
+.mascot-text-below p {
+  color: #BD953E;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.mascot-placeholder p:last-child {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+  max-width: 300px;
+}
+
+/* About section */
+.about-section {
+  color: #D4B356;
+  padding: 1rem;
+}
+
+.about-section h2 {
+  color: #D4B356;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid #BD953E;
+  padding-bottom: 0.5rem;
+}
+
+.about-section p {
+  margin-bottom: 1.5rem;
+  color: #BD953E;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.purpose-textbox {
+  background: linear-gradient(135deg, rgba(53, 2, 0, 0.9) 0%, rgba(108, 2, 0, 0.9) 100%);
+  border: 3px solid #BD953E;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  margin-top: 1rem;
+}
+
+.purpose-textbox h3 {
+  color: #D4B356;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #BD953E;
+  padding-bottom: 0.5rem;
+}
+
+.purpose-textbox p {
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  color: #BD953E;
+}
+
+.purpose-textbox p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 968px) {
+  .homepage {
+    height: calc(100vh - 70px);
+    padding: 1.5rem;
+  }
+  
+  .main-content {
+    gap: 2rem;
+  }
+  
+  .mascot-placeholder {
+  
+  .mascot-image {
+    width: 280px;
+    height: 280px;
+  }
+}
+  
+  .mascot-text-above h3 {
+    font-size: 1.6rem;
+  }
+  
+  .mascot-text-below p {
+    font-size: 1.1rem;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage {
+    height: calc(100vh - 60px);
+    padding: 1rem;
+  }
+  
+  
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .mascot-placeholder {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  
+  
+  .mascot-container {
+    gap: 1rem;
+  }
+  
+  .mascot-image {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  
+  .mascot-text-above h3 {
+    font-size: 1.5rem;
+  }
+  
+  .mascot-text-below p {
+    font-size: 1rem;
+    max-width: 250px;
+  }
+  
+  .about-section h2 {
+    font-size: 2rem;
+  }
+  
+  
+  .purpose-textbox {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage {
+    height: calc(100vh - 70px);
+    padding: 0.5rem;
+  }
+  
+  .mascot-placeholder {
+    width: 220px;
+    height: 220px;
+  }
+  
+  
+  .mascot-image {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .mascot-text-above h3 {
+    font-size: 1.3rem;
+  }
+  
+  .mascot-text-below p {
+    font-size: 0.9rem;
+    max-width: 220px;
+  }
+  
+  .about-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  
+  .purpose-textbox {
+    padding: 1rem;
+  }
+  
+  
+  .purpose-textbox h3 {
+    font-size: 1.5rem;
+  }
+}
