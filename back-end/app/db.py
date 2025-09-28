@@ -1,6 +1,7 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import Mapped, mapped_column, sessionmaker, declarative_base
 import hmac
+import hashlib
 
 db = sa.create_engine("sqlite:///./data.db", echo=False)
 Session = sessionmaker(bind=db)
@@ -15,6 +16,35 @@ class User(Base):
     email: Mapped[str] = mapped_column(sa.String(255), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(sa.String(255), nullable=False)
 
+def create_admin_account():
+    """Create default admin account if it doesn't exist"""
+    admin_email = "admin@gmail.com"
+    admin_username = "admin@gmail.com"  # Use email as username
+    admin_password = "admin123"
+    
+    # Hash the password the same way as in auth routes
+    password_hash = hashlib.sha256(admin_password.encode()).hexdigest()
+    
+    with Session() as session:
+        # Check if admin already exists
+        existing_admin = session.query(User).filter_by(email=admin_email).first()
+        if existing_admin:
+            print("Admin account already exists")
+            return existing_admin
+        
+        # Create admin user (no is_admin field in DB - determined by email)
+        admin_user = User(
+            username=admin_username,
+            email=admin_email,
+            password_hash=password_hash
+        )
+        session.add(admin_user)
+        session.commit()
+        session.refresh(admin_user)
+        print(f"Created admin account: {admin_email}")
+        return admin_user
+
+
 def main() -> None:
     # create the SQLite file and tables only if the users table doesn't exist yet
     inspector = sa.inspect(db)
@@ -23,6 +53,9 @@ def main() -> None:
         print("Created tables")
     else:
         print("Tables already exist, skipping create_all")
+    
+    # Create admin account
+    create_admin_account()
 
 
 def authenticate(email: str, password_hash: str):
@@ -36,7 +69,9 @@ def authenticate(email: str, password_hash: str):
             return None
         try:
             if hmac.compare_digest(user.password_hash, password_hash):
-                return (user.id, user.email, user.password_hash)
+                # Check if user is admin by email (no DB field needed)
+                is_admin = user.email.lower() == "admin@gmail.com"
+                return (user.id, user.email, user.password_hash, is_admin)
             else:
                 return None
         except Exception:
@@ -55,12 +90,21 @@ def create_user(username: str, email: str, password_hash: str) -> User | None:
         if exists:
             return None
 
-        new_user = User(username=username, email=email, password_hash=password_hash)
+        new_user = User(
+            username=username, 
+            email=email, 
+            password_hash=password_hash
+        )
         session.add(new_user)
         session.commit()
         # refresh to get generated id
         session.refresh(new_user)
         return new_user
+
+
+def is_admin_user(email: str) -> bool:
+    """Check if a user is admin based on their email"""
+    return email.lower() == "admin@gmail.com"
 
 
 def get_user_by_email(email: str) -> User | None:

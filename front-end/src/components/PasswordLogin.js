@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './PasswordLogin.css';
+import { authAPI, handleAPIError } from '../services/api';
 
 const PasswordLogin = ({ email, onLogin, onBack }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [isSummoned, setIsSummoned] = useState(false);
   const [availableChars, setAvailableChars] = useState([]);
   const [usedChars, setUsedChars] = useState(new Set());
@@ -61,30 +63,65 @@ const PasswordLogin = ({ email, onLogin, onBack }) => {
     setIsSummoned(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (!password.trim()) {
+      setError('Please enter a password.');
+      return;
+    }
+
     setError('');
+    setIsLoading(true);
     
-    // Simple demo validation - in real app, this would check against a database
-    const demoPassword = 'Demo123!'; // Demo password for testing
-    
-    if (password === demoPassword) {
-      onLogin({ email });
-    } else {
-      setError('Incorrect password. Please try again.');
+    try {
+      // Login with backend API
+      const response = await authAPI.login(email, password);
+      
+      // Get user info from token
+      const userInfo = authAPI.getCurrentUser();
+      
+      // Call parent component with user data
+      onLogin({ 
+        email: userInfo.email,
+        id: userInfo.user_id,
+        token: response.access_token
+      });
+    } catch (error) {
+      const errorMessage = handleAPIError(error);
+      setError(errorMessage);
       setPassword('');
       setIsSummoned(false);
       // Reset character cycle on incorrect password
       setAvailableChars([...characterSet].sort(() => Math.random() - 0.5));
       setUsedChars(new Set());
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleAdminLogin = () => {
-    // Auto-login as admin
-    onLogin({ 
-      email: email,
-      isAdmin: true 
-    });
+  const handleAdminLogin = async () => {
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      // Use the backend admin login endpoint
+      const response = await authAPI.adminLogin();
+      
+      // Get user info from the token
+      const userInfo = authAPI.getCurrentUser();
+      
+      // Call parent component with admin user data
+      onLogin({ 
+        email: userInfo.email,
+        id: userInfo.user_id,
+        token: response.access_token,
+        isAdmin: userInfo.is_admin
+      });
+    } catch (error) {
+      const errorMessage = handleAPIError(error);
+      setError(`Admin login failed: ${errorMessage}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const togglePasswordVisibility = (show) => {
@@ -171,9 +208,9 @@ const PasswordLogin = ({ email, onLogin, onBack }) => {
             type="button" 
             className="action-btn submit-btn"
             onClick={handleSubmit}
-            disabled={password.length === 0}
+            disabled={password.length === 0 || isLoading}
           >
-            Login
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </div>
 
@@ -193,10 +230,11 @@ const PasswordLogin = ({ email, onLogin, onBack }) => {
             type="button" 
             className="admin-btn"
             onClick={handleAdminLogin}
+            disabled={isLoading}
           >
-            🔑 Admin Login
+            🔑 {isLoading ? 'Logging in as Admin...' : 'Admin Login'}
           </button>
-          <p className="admin-note">Developer access - bypass password verification</p>
+          <p className="admin-note">Auto-login as admin@gmail.com with full privileges</p>
         </div>
 
         <button type="button" className="back-btn" onClick={onBack}>

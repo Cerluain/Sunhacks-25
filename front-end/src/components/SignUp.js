@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignUp.css';
+import { authAPI, handleAPIError } from '../services/api';
 
 const SignUp = ({ onSignUp, onSwitchToLogin }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const SignUp = ({ onSignUp, onSwitchToLogin }) => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const passwordRequirements = {
     hasUpperCase: /[A-Z]/.test(formData.password),
@@ -49,12 +51,32 @@ const SignUp = ({ onSignUp, onSwitchToLogin }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Form is valid, proceed with sign up
-      onSignUp({ email: formData.email });
+      setIsLoading(true);
+      setErrors({});
+      
+      try {
+        // Register user with backend API
+        const response = await authAPI.register(formData.email, formData.password);
+        
+        // Auto-login after successful registration
+        await authAPI.login(formData.email, formData.password);
+        
+        // Call parent component with user data
+        onSignUp({ 
+          email: formData.email,
+          id: response.id,
+          message: response.message
+        });
+      } catch (error) {
+        const errorMessage = handleAPIError(error);
+        setErrors({ submit: errorMessage });
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -151,12 +173,14 @@ const SignUp = ({ onSignUp, onSwitchToLogin }) => {
           </ul>
         </div>
 
+        {errors.submit && <div className="error-message submit-error">{errors.submit}</div>}
+
         <button 
           type="submit" 
-          className={`signup-btn ${allRequirementsMet ? 'active' : ''}`}
-          disabled={!allRequirementsMet || !formData.confirmPassword}
+          className={`signup-btn ${allRequirementsMet && !isLoading ? 'active' : ''}`}
+          disabled={!allRequirementsMet || !formData.confirmPassword || isLoading}
         >
-          Sign Up
+          {isLoading ? 'Creating Account...' : 'Sign Up'}
         </button>
 
         <div className="switch-form">
