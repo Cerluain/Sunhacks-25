@@ -27,7 +27,6 @@
   gap: 1.5rem; /* Added gap for spacing between text and image */
 }
 
-.mascot-placeholder {
 
 /* Text above mascot */
 .mascot-text-above {
@@ -68,8 +67,6 @@
 .mascot-text-below {
   text-align: center;
 }
-
-.mascot-placeholder p:first-child {
 
 .mascot-text-below p {
   color: #BD953E;
