@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 # use a relative import so the local v1 package resolves correctly in editors and at runtime
-from ..dependencies import get_db
+from app.api.v1.dependencies import get_db
 from app.core import auth as auth_core
 from app import crud
 from app.schemas.user import Token

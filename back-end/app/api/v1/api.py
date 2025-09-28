@@ -1,4 +1,6 @@
 # --- Imports ---
+import os
+from app.db.init_db import init_db
 # Import FastAPI to create the main application instance.
 from fastapi import FastAPI
 # Import the routers from the endpoints modules.
@@ -32,3 +34,9 @@ async def read_root():
     A simple endpoint to confirm the API is running.
     """
     return {"message": "Welcome to the API!"}
+
+@app.on_event("startup")
+def on_startup():
+    # only in dev local, guard with env var
+    if os.getenv("CREATE_TABLES", "false").lower() in ("1", "true", "yes"):
+        init_db()

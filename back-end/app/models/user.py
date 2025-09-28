@@ -1,7 +1,6 @@
 # --- Imports ---
 import uuid
 from sqlalchemy import Boolean, Column, String
-from sqlalchemy.dialects.postgresql import UUID
 
 # Import the Base class from our custom base_class module
 from app.db.base_class import Base
@@ -18,7 +17,9 @@ class User(Base):
     
     # Primary Key: A universally unique identifier for the user.
     # We use UUID for better scalability and to avoid enumeration attacks.
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    # Use a string-based UUID column for cross-dialect compatibility (works with SQLite).
+    # We store UUIDs as 36-char strings (hex with hyphens) and generate them with uuid.uuid4().
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     
     # User's full name (optional).
     full_name = Column(String, index=True)
