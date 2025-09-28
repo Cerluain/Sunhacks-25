@@ -3,7 +3,6 @@ Example of how to use the LLM agent as a JSON API endpoint
 """
 from dotenv import load_dotenv
 from app.ai.llm import chain, process_result
-import json
 
 def query_llm_json(user_input: str) -> dict:
     """

@@ -3,7 +3,6 @@ Conversation-based API for handling follow-up questions
 """
 from dotenv import load_dotenv
 from app.ai.llm import chain, process_result
-import json
 from typing import List, Dict
 
 class ConversationAPI:
