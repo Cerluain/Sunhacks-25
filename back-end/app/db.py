@@ -11,6 +11,7 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    username: Mapped[str] = mapped_column(sa.String(255), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(sa.String(255), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(sa.String(255), nullable=False)
 
@@ -24,32 +25,37 @@ def main() -> None:
         print("Tables already exist, skipping create_all")
 
 
-def authenticate(email: str, password_hash: str) -> None|any:
+def authenticate(email: str, password_hash: str):
     if not email or not password_hash:
         return None
 
     with Session() as session:
+        # Use email for authentication instead of username
         user = session.query(User).filter_by(email=email).one_or_none()
         if user is None:
             return None
         try:
-            return ((id, email, password_hash) 
-                    if hmac.compare_digest(user.password_hash, password_hash) else None)
+            if hmac.compare_digest(user.password_hash, password_hash):
+                return (user.id, user.email, user.password_hash)
+            else:
+                return None
         except Exception:
             return None
 
 
-def create_user(email: str, password_hash: str) -> User | None:
-    if not email or not password_hash:
+def create_user(username: str, email: str, password_hash: str) -> User | None:
+    if not username or not email or not password_hash:
         return None
 
     with Session() as session:
-        # Check for existing email
-        exists = session.query(User).filter_by(email=email).first()
+        # Check for existing email or username
+        exists = session.query(User).filter(
+            (User.email == email) | (User.username == username)
+        ).first()
         if exists:
             return None
 
-        new_user = User(email=email, password_hash=password_hash)
+        new_user = User(username=username, email=email, password_hash=password_hash)
         session.add(new_user)
         session.commit()
         # refresh to get generated id

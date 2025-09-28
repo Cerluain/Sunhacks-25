@@ -15,7 +15,7 @@ except ImportError:
     pass
 
 try:
-    from .prompts import *
+    from .prompt import *
 except ImportError:
     pass
 

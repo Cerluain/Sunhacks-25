@@ -17,8 +17,8 @@ from datetime import datetime
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_tavily import TavilySearch
-from app.models.llm_schemas import LLMResponse, Source
-from .prompts import PROMPT_TEMPLATE
+from .llm_schema import LLMResponse, Source
+from .prompt import PROMPT_TEMPLATE
 from langchain_core.prompts import PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 
@@ -94,16 +94,3 @@ def process_result(result):
             sources=sources  # Now includes extracted URLs from searches
         )
     return result
-
-def query_llm(user_input: str) -> LLMResponse:
-    """
-    Query the LLM agent with conversation memory and return structured response.
-    
-    Args:
-        user_input (str): The user's question or input
-        
-    Returns:
-        LLMResponse: Structured response with answer and sources
-    """
-    result = chain.invoke({"input": user_input})
-    return process_result(result)
