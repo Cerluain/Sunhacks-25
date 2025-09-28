@@ -5,7 +5,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm your friendly character. How can I help you today? Feel free to type as much as you want - I've increased the character limit so you can express yourself fully!",
+      text: "Hello! I'm Sparky.AI, your favorite SunDevil AI! How can I help you today? Forks Up!",
       sender: 'character',
       timestamp: new Date()
     }
@@ -99,7 +99,7 @@ const Chat = () => {
               <span>🎭</span>
             </div>
             <div className="character-info">
-              <h3>Friendly Character</h3>
+              <h3> Sparky.AI</h3>
               <p>Your AI Companion</p>
               <div className="character-status">
                 <span className="status-indicator"></span>
@@ -111,9 +111,7 @@ const Chat = () => {
           <div className="character-description">
             <h4>About Me</h4>
             <p>
-              I'm here to help you navigate this application and have meaningful conversations. 
-              Feel free to ask me anything or just chat! You now have plenty of space to express 
-              yourself with our increased character limit.
+              I’m here to make your academic journey easier by helping you find resources, stay organized, and connect with your community at ASU. Whether you need quick answers, study support, or just someone to chat with, I’ve got you covered!
             </p>
           </div>
         </div>
@@ -121,10 +119,8 @@ const Chat = () => {
         {/* Chat Section */}
         <div className="chat-section">
           <div className="chat-header">
-            <h2>Conversation with Friendly Character</h2>
-            <div className="chat-stats">
-              {messages.length} messages • {MAX_CHARACTERS} character limit
-            </div>
+            <h2>Conversation with Sparky.AI</h2>
+          
           </div>
 
           <div className="messages-container">
