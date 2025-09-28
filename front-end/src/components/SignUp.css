@@ -1,26 +1,23 @@
 .signup-container {
-  height: calc(100vh - 70px); /* Full height minus header */
+  min-height: calc(100vh - 70px); /* Change to min-height */
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
-  padding: 1rem; /* Reduced padding */
-  overflow: hidden; /* Prevent scrolling */
+  padding: 1rem;
 }
 
 .signup-form {
   background: linear-gradient(135deg, #6C0200 0%, #900500 100%);
-  padding: 2rem; /* Reduced from 2.5rem */
+  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 450px;
-  max-height: 90vh; /* Limit maximum height */
   display: flex;
   flex-direction: column;
-  gap: 1.2rem; /* Slightly reduced gap */
+  gap: 1.2rem;
   border: 2px solid #BD953E;
-  overflow-y: auto; /* Allow scrolling only within the form if needed */
 }
 
 .signup-form h2 {
@@ -186,7 +183,7 @@
 @media (max-width: 480px) {
   .signup-container {
     padding: 0.5rem;
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px); /* Change to min-height */
   }
   
   .signup-form {
