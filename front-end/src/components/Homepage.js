@@ -15,7 +15,7 @@ const Homepage = () => {
         
         <section className="about-section">
           <h2>About Us</h2>
-          <p>Welcome to SunHacks! We are dedicated to creating innovative solutions that make a difference in our community.</p>
+          <p>Welcome to our team project!</p>
           
           <div className="purpose-textbox">
             <h3>Our Purpose</h3>
