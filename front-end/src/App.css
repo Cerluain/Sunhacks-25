@@ -1,20 +1,14 @@
 /* Updated App.css */
 .App {
   text-align: center;
-  height: 100vh; /* Use full viewport height */
+  min-height: 100vh; /* Change from height to min-height */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevent App from scrolling */
-}
-
-/* Remove the margin-top since we're using flexbox */
-.App > *:not(.app-header) {
-  margin-top: 0;
 }
 
 .App-header {
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
-  flex: 1; /* Take remaining space */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +16,12 @@
   font-size: calc(10px + 2vmin);
   color: #D4B356;
   padding: 2rem;
-  overflow: hidden; /* Prevent scrolling */
+  min-height: 60vh; /* Ensure minimum height */
+}
+
+/* Remove the margin-top since we're using flexbox */
+.App > *:not(.app-header) {
+  margin-top: 0;
 }
 
 .App-link {

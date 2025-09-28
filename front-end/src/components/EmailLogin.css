@@ -1,11 +1,10 @@
 .email-login-container {
-  height: calc(100vh - 70px); /* Full height minus header */
+  min-height: calc(100vh - 70px); /* Change to min-height */
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
-  padding: 1rem; /* Reduced padding */
-  overflow: hidden; /* Prevent scrolling */
+  padding: 1rem;
 }
 
 .email-login-form {

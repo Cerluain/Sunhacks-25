@@ -1,12 +1,11 @@
 /* components/Homepage.css */
 .homepage {
-  height: calc(100vh - 70px); /* Full height minus header */
+  min-height: calc(100vh - 70px); /* Change to min-height */
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
   padding: 2rem;
-  overflow: hidden; /* Prevent scrolling */
 }
 
 .main-content {
@@ -121,8 +120,8 @@
 }
 
 @media (max-width: 768px) {
-  .homepage {
-    height: calc(100vh - 60px);
+   .homepage {
+    min-height: calc(100vh - 60px); /* Change to min-height */
     padding: 1rem;
   }
   
@@ -149,8 +148,8 @@
 
 @media (max-width: 480px) {
   .homepage {
-    height: calc(100vh - 70px);
-    padding: 0.5rem;
+   min-height: calc(100vh - 70px); /* Change to min-height */
+   padding: 0.5rem;
   }
   
   .mascot-placeholder {

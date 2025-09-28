@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
 code {
@@ -13,10 +13,10 @@ code {
     monospace;
 }
 
-/* Ensure no scroll on the main page */
+/* Allow scrolling on the main page */
 html, body, #root {
-  height: 100%;
-  overflow: hidden; /* Prevent entire page from scrolling */
+  height: auto; /* Change from 100% to auto */
+  min-height: 100vh; /* Ensure minimum height */
 }
 
 #root {
