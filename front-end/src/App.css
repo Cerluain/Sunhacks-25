@@ -45,9 +45,9 @@
   color: white;
 } */
 
-/* .App-link {
+.App-link {
   color: #61dafb;
-} */
+}
 
 @keyframes App-logo-spin {
   from {
@@ -58,7 +58,7 @@
   }
 }
 
-/* Login form styles */
+/* Login form styles
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -123,4 +123,4 @@
   background: #ef4444;
   color: white;
   cursor: pointer;
-}
+} */
