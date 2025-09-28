@@ -1,5 +1,23 @@
+/* Updated App.css */
 .App {
   text-align: center;
+  min-height: 100vh;
+}
+
+.App-header {
+  background: linear-gradient(135deg, #350200 0%, #6C0200 100%);
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #D4B356;
+  padding: 2rem;
+}
+
+.App-link {
+  color: #BD953E;
 }
 
 .App-logo {
@@ -13,21 +31,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,69 +40,54 @@
   }
 }
 
-/* Login form styles */
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f6f8fc 0%, #e9eef8 100%);
-}
-
-.login-form {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(20,30,60,0.1);
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.login-form h2 {
-  margin: 0 0 0.5rem 0;
-  text-align: center;
-}
-
-.login-form label {
-  font-size: 0.85rem;
-  color: #333;
-}
-
-.login-form input {
-  padding: 0.5rem 0.6rem;
-  border: 1px solid #d8dde9;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.login-btn {
-  margin-top: 0.5rem;
-  padding: 0.6rem;
-  border: none;
-  background: #2563eb;
+.admin-badge {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   color: white;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
   font-weight: 600;
+  margin: 1rem 0;
+  border: 2px solid #fca5a5;
 }
 
-.login-error {
-  color: #b91c1c;
-  background: #fff0f0;
-  padding: 0.4rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  text-align: center;
+/* Add to existing App.css */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.chat-btn {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chat-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
 .logout-btn {
-  margin-top: 1rem;
-  padding: 0.5rem 0.9rem;
-  border-radius: 6px;
-  border: none;
-  background: #ef4444;
-  color: white;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #6C0200 0%, #900500 100%);
+  color: #D4B356;
+  border: 2px solid #BD953E;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, #900500 0%, #6C0200 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(144, 5, 0, 0.4);
 }
