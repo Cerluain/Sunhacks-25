@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  align-items: center;
+  align-items: start; /* Changed to start for better text alignment */
 }
 
 /* Mascot section */
@@ -23,25 +23,52 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem; /* Added gap for spacing between text and image */
 }
 
-.mascot-placeholder {
+
+/* Text above mascot */
+.mascot-text-above {
+  text-align: center;
+}
+
+.mascot-text-above h3 {
+  color: #D4B356;
+  font-size: 1.8rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid #BD953E;
+  padding-bottom: 0.5rem;
+}
+
+/* Mascot image */
+.mascot-image {
   width: 320px;
   height: 320px;
-  background: linear-gradient(135deg, #900500 0%, #6C0200 100%);
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 3px solid #BD953E;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  color: #D4B356;
-  text-align: center;
-  padding: 1rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #900500 0%, #6C0200 100%);
 }
 
-.mascot-placeholder p:first-child {
+.mascot-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from cover to contain to show full GIF */
+  border-radius: 12px;
+}
+
+/* Text below mascot */
+.mascot-text-below {
+  text-align: center;
+}
+
+.mascot-text-below p {
+  color: #BD953E;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -49,8 +76,10 @@
 
 .mascot-placeholder p:last-child {
   font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
   font-style: italic;
-  color: #BD953E;
+  max-width: 300px;
 }
 
 /* About section */
@@ -114,8 +143,20 @@
   }
   
   .mascot-placeholder {
+  
+  .mascot-image {
     width: 280px;
     height: 280px;
+  }
+}
+  
+  .mascot-text-above h3 {
+    font-size: 1.6rem;
+  }
+  
+  .mascot-text-below p {
+    font-size: 1.1rem;
+    max-width: 280px;
   }
 }
 
@@ -124,6 +165,7 @@
     min-height: calc(100vh - 60px); /* Change to min-height */
     padding: 1rem;
   }
+  
   
   .main-content {
     grid-template-columns: 1fr;
@@ -137,9 +179,30 @@
     margin: 0 auto;
   }
   
+  
+  .mascot-container {
+    gap: 1rem;
+  }
+  
+  .mascot-image {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  
+  .mascot-text-above h3 {
+    font-size: 1.5rem;
+  }
+  
+  .mascot-text-below p {
+    font-size: 1rem;
+    max-width: 250px;
+  }
+  
   .about-section h2 {
     font-size: 2rem;
   }
+  
   
   .purpose-textbox {
     padding: 1.5rem;
@@ -157,13 +220,30 @@
     height: 220px;
   }
   
+  
+  .mascot-image {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .mascot-text-above h3 {
+    font-size: 1.3rem;
+  }
+  
+  .mascot-text-below p {
+    font-size: 0.9rem;
+    max-width: 220px;
+  }
+  
   .about-section h2 {
     font-size: 1.8rem;
   }
   
+  
   .purpose-textbox {
     padding: 1rem;
   }
+  
   
   .purpose-textbox h3 {
     font-size: 1.5rem;

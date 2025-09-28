@@ -6,7 +6,7 @@ const Header = ({ user, onLoginClick, onLogout, onHomeClick, onChatClick }) => {
   return (
     <header className="app-header">
       <div className="header-content">
-        <div className="company-name">SunHacks</div>
+        <div className="company-name">T.I.L.T AI</div>
         <nav className="header-nav">
           <div className="button-group">
             <button className="nav-button home-btn" onClick={onHomeClick}>

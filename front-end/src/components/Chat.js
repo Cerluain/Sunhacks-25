@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Chat.css';
+import sparkyGif from '../images/sparkyAI.gif'; // Import the GIF
 
 const Chat = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm your friendly character. How can I help you today? Feel free to type as much as you want - I've increased the character limit so you can express yourself fully!",
+      text: "Hello! I'm Sparky.AI, your favorite SunDevil AI! How can I help you today? Forks Up!",
       sender: 'character',
       timestamp: new Date()
     }
@@ -13,7 +14,7 @@ const Chat = () => {
   const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef(null);
   
-  const MAX_CHARACTERS = 2500; // 5 times larger than before (500 → 2500)
+  const MAX_CHARACTERS = 2500;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -59,7 +60,7 @@ const Chat = () => {
     } else if (message.includes('how are you')) {
       return "I'm doing wonderful! Thanks for asking. The new character limit means we can have much more meaningful conversations now. How about you? How has your day been? Feel free to share as much detail as you'd like!";
     } else if (message.includes('name')) {
-      return "I'm your friendly character! You can call me whatever you like! With the increased character limit, we can have proper conversations about names, their meanings, and why they're important to people. What would you like to call me?";
+      return "I'm Sparky.AI, your friendly SunDevil companion! With the increased character limit, we can have proper conversations about names, their meanings, and why they're important to people. What would you like to know about me?";
     } else if (message.includes('help')) {
       return "I'm here to help! Feel free to ask me anything about this application or just chat! Now that you have more space to type, you can describe your questions or concerns in detail, and I'll do my best to provide comprehensive answers that address all aspects of what you're dealing with.";
     } else if (message.includes('thank')) {
@@ -96,10 +97,10 @@ const Chat = () => {
         <div className="character-section">
           <div className="character-image-placeholder">
             <div className="character-image">
-              <span>🎭</span>
+              <img src={sparkyGif} alt="Sparky.AI Mascot" />
             </div>
             <div className="character-info">
-              <h3>Friendly Character</h3>
+              <h3>Sparky.AI</h3>
               <p>Your AI Companion</p>
               <div className="character-status">
                 <span className="status-indicator"></span>
@@ -111,9 +112,7 @@ const Chat = () => {
           <div className="character-description">
             <h4>About Me</h4>
             <p>
-              I'm here to help you navigate this application and have meaningful conversations. 
-              Feel free to ask me anything or just chat! You now have plenty of space to express 
-              yourself with our increased character limit.
+              I'm here to make your academic journey easier by helping you find resources, stay organized, and connect with your community at ASU. Whether you need quick answers, study support, or just someone to chat with, I've got you covered!
             </p>
           </div>
         </div>
@@ -121,10 +120,7 @@ const Chat = () => {
         {/* Chat Section */}
         <div className="chat-section">
           <div className="chat-header">
-            <h2>Conversation with Friendly Character</h2>
-            <div className="chat-stats">
-              {messages.length} messages • {MAX_CHARACTERS} character limit
-            </div>
+            <h2>Conversation with Sparky.AI</h2>
           </div>
 
           <div className="messages-container">
